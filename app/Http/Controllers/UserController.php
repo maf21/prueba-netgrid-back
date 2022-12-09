@@ -27,4 +27,16 @@ class UserController extends Controller
         }
         return $user;
     }
+
+    function updateLogin(Request $req){
+        $user = User::find($req->input('id'));
+        $user->name = $req->input('name');
+        $user->email = $req->input('email');
+        if($req->input('password') != null){$user->password = Hash::make($req->input('password'));}
+        $user->address = $req->input('address');
+        $user->birthdate = $req->input('birthdate');
+        $user->city = $req->input('city');
+        $user->save();
+        return $user;
+    }
 }
